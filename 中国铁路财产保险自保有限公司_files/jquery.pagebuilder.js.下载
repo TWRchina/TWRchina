@@ -1,0 +1,243 @@
+var _global_settings;
+
+(function($) {
+	
+	var _res_root = "/tplresource/cms/www/zhongtie";
+	var _include_root = "/include";
+	//var _res_root = "";
+	//var _include_root = "";
+			
+	var _header = "/header.html";
+	var _footer = "/footer.html";
+	
+	$.fn.pagebuilder = function(options) {
+		
+		
+		var settings = $.extend({
+			  'headerElement' : '#header',
+			     'headerHtml' : _include_root + _header,
+			  'footerElement' : '#footer',
+			     'footerHtml' : _include_root + _footer,
+			     'responsive' : 'true',
+			           'page' : '#page',
+			'leftMenuElement' : '#leftMenu',
+			   'leftMenuHtml' : '',
+	 'leftMenuActiveItemHtml' : '',
+			'leftMenuOpenAll' : false,
+			       'callback' : null
+		}, options);
+		
+		
+		
+		_global_settings = settings;
+		//load basic scripts;
+		
+	
+		Modernizr.load([
+				// load basic css and js
+				{
+				load:{
+					'tp-nav.css': _res_root + '/css/common/tp-nav.css',
+					'bootstrap.min.js': _res_root + '/js/common/bootstrap.min.js'
+				},
+				callback:{
+					'tp-nav.css': function () {
+						//console.log('tp-nav.css loaded!');
+					},
+					'bootstrap.min.js': function () {
+						//console.log('bootstrap.min.js loaded!');
+						$('body').trigger('bootstrapready');
+					}
+				},
+				complete: function () {
+					
+					loadHeader();
+					loadLeftMenu();
+					loadFooter();
+				}
+			}
+		]);	
+
+
+
+		var loadHeader = function (){
+			
+			if(settings.headerHtml.length===0)
+				return false;
+		
+			$(settings.headerElement).load(settings.headerHtml, function () {
+				
+				//console.log('header loaded!');
+				
+				//auto set active		
+				var matched = false;
+				
+				$(_global_settings.headerElement).addClass('hidden-phone').find('#main-nav').find('a').each(function(index, element) {
+							
+					if(element.getAttribute('dir')==='')
+						return true;
+							
+					if(location.href.indexOf('/' + element.getAttribute('dir') + '/')>=0){
+						$(element).parent().addClass('active');
+						matched = true;
+						return false;
+					}
+							
+				});
+						
+				if(!matched){
+					$(settings.headerElement).find('#main-nav').find('li').first().addClass('active');
+				}
+				
+				//make top menu responsive
+				if($(_global_settings.headerElement) && $(_global_settings.page)){
+								
+					$('<div id="phone-menu-bar" class="menu-bar"></div>')
+													.append('<div class="brand"> <img src="' + _res_root +'/img/common/zt-logo.png" width="85" /> </div>')
+													.append('<a id="menu-button" href="#main-nav"> <span></span> <span></span> <span></span></a>')
+													.prependTo($(_global_settings.page));			
+				}
+				
+				Modernizr.load([
+					{
+						
+						test: _global_settings.responsive && Modernizr.mq('only all'),
+						yep: {
+							'jRespond.min.js': _res_root + '/js/common/jRespond.min.js',
+							'smartMenu.js': _res_root + '/js/common/smartMenu.js'
+						},
+						callback:{
+							'jRespond.min.js': function () {
+								//console.log('jRespond.min.js loaded!');
+							},
+							'smartMenu.js': function () {
+								//console.log('smartMenu.js loaded!');
+							}
+						},
+						complete: function () {
+							
+										
+							$('a[href="#main-nav"]').bind('click',function(){
+								$('#page').toggleClass('opened');
+							});		
+							
+							
+							if($.isFunction(_global_settings.callback))
+								_global_settings.callback.call();
+								
+							//console.log('body ready');
+							$("body").trigger($.Event("ready"));
+							
+						}
+					}
+				]);	
+	
+			});
+			
+		}
+	
+		var loadLeftMenu = function (){
+			
+			//load leftMenu
+			if(_global_settings.leftMenuHtml.length===0)
+				return false;
+				
+			$(_global_settings.leftMenuElement).load(_global_settings.leftMenuHtml, function () {
+				
+				//console.log('leftMenu.html loaded!');
+				
+				$(_global_settings.leftMenuElement).addClass('sidebar-left')
+											.find('.accordion')
+											.prepend('<div id="left-menu-toggle" class="hidden-desktop"></div>')
+											.wrap('<div id="left-menu-wrapper" class="v-sepline"></div>');
+
+				$(_global_settings.leftMenuElement).find('.accordion-body ul > li > a').prepend('<i class="bullet"></i>');
+					
+				//auto set active
+				$(_global_settings.leftMenuElement).find('a').each(function(index, element) {
+			
+					if(element.getAttribute('href').match(/#/)){
+					
+					}else{
+						if(_global_settings.leftMenuActiveItemHtml === ''){
+							if(location.href.replace(/\_\d+/,'').indexOf(element.getAttribute('href'))>=0 && element.getAttribute('href').length>0 || matchItem(location.href.replace(/\_\d+/,''),element.getAttribute('href'))){
+								$(this).addClass('active').parents('li').addClass('active');
+								$(this).parents('.accordion-group').addClass('active');
+								$(this).children('i.bullet').addClass('active');
+								return true;
+							}
+							
+						}else{
+							if(element.getAttribute('href') === _global_settings.leftMenuActiveItemHtml){
+								$(this).addClass('active').parents('li').addClass('active');
+								$(this).parents('.accordion-group').addClass('active');
+								$(this).children('i.bullet').addClass('active');
+								return true;
+							}
+						}
+					}
+				});
+				
+				if($('html').hasClass('lt-ie7')){ //if it's old ie, disable accordion
+					$(_global_settings.leftMenuElement).find('a[data-toggle="collapse"]')
+												.removeAttr('data-toggle')
+												.attr('href','#')
+												.children('i')
+												.addClass('down');
+												
+				}
+				
+				$(_global_settings.leftMenuElement).trigger($.Event("ready"));
+				
+				//add event listener
+				$(_global_settings.leftMenuElement).find('.collapse').on('hidden', function () {
+					$(this).parent().find('i.pointer').removeClass('down');
+				})
+				$(_global_settings.leftMenuElement).find('.collapse').on('shown', function () {
+					$(this).parent().find('i.pointer').addClass('down');
+				})
+				$('#left-menu-toggle').bind('click',function(){
+					$(this).parents('#left-menu-wrapper').toggleClass('opened');
+				});
+
+			});	
+			
+			
+			$(_global_settings.leftMenuElement).on('ready',function () {
+				
+				if(_global_settings.leftMenuOpenAll) 
+					$(_global_settings.leftMenuElement).find('.collapse').collapse('show'); //keep all open
+				else{
+					//auto open active
+					if(_global_settings.leftMenuHtml.length>0 && !$('html').hasClass('lt-ie7')){	
+						
+						try{
+							//console.log('trying to open menu :' + $(settings.leftMenuElement).find('.active').parents('.collapse').attr('id'));
+							$(settings.leftMenuElement).find('.active').parents('.collapse').collapse('show');
+						}catch(e){};
+					}	
+				}	
+			});
+			
+			//end load left menu
+		}
+	
+		var loadFooter = function (){
+		
+			if(_global_settings.footerHtml.length>0)
+				$(_global_settings.footerElement).load(_global_settings.footerHtml, function () {
+					//console.log('footer loaded');
+				});
+		
+		};
+		
+		var matchItem = function(href,menu_item){
+			if(href.match(/\w+\//g)!==null && menu_item.match(/\/\w+/g)!==null)
+				return href.match(/\w+\//g).pop().replace(/\//,'') === menu_item.match(/\/\w+/g).pop().replace(/\//,'');
+		};
+	};
+
+})( jQuery );
+
+// make console.log safe to use
+window.console||(console={log:function(){}});

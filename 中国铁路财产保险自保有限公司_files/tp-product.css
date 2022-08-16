@@ -1,0 +1,18 @@
+.in-store {
+       position:relative;
+}
+
+.in-store:after{
+	content:"";
+	position:absolute;
+	top:-4px;
+	right:8px;
+	width:22px;
+	height:28px;
+	display:block;
+	background:url(../../img/home/store-sale.png) no-repeat;
+}
+.phone .in-store:after{
+    width:18px;
+    height:25px
+}

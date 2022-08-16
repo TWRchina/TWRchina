@@ -1,0 +1,412 @@
+/*--------头部灰色功能条 开始---------*/
+.wraper {
+	margin: 0 auto;
+	text-align: left;
+	//overflow:hidden;
+	clear: both;
+}
+.lt-ie6 .wraper {
+	margin: 0px auto 0px 30pt;
+}
+.desktop li.has-more:hover  ul, .desktop li.has-more:hover div {
+	display:block;  
+}
+.desktop li.has-more > a:before {
+	 content: ""; 
+	 position: absolute; 
+	 right: 6px; 
+	 top: 18px; 
+	 border: 5px solid transparent; 
+	 border-color: rgb(50,50,50) transparent transparent transparent; 
+}
+#global-nav {
+	background:url(/tplresource/cms/www/zhongtie/img/common/header_bg.jpg) repeat-x; 
+	height:50px; 
+	line-height:30px; 
+	}
+#global-nav ul {
+	padding: 0px; 
+	margin: 0px auto; 
+	list-style: none; 
+}
+#global-nav ul li {
+	display: inline-block; 
+}
+#global-nav ul li a:hover {
+	text-decoration: underline; 
+}
+.lt-ie6 #global-nav ul li {
+	list-style-type: none; 
+}
+.lt-ie8 #global-nav ul li {
+	display: block; 
+	float: left; 
+	text-align: center; 
+}
+
+/*--------头部灰色功能条 结束---------*/
+
+
+/*----------一级菜单 开始-----------*/
+.phone #main-nav li{
+    text-align:left;
+}
+.phone #main-nav li.active {
+	background: #036;
+}
+#main-nav li.active > a, .phone #main-nav li > a {
+	color: #fff;
+}
+#main-nav.short li.active > a, .phone #main-nav.short li > a {
+	color: #555;
+}
+.phone #main-nav {
+	position: absolute;
+	top: 0px; 
+	left: 0px; 
+	bottom:0px;
+	background: #003; 
+}
+.phone #main-nav li:hover {
+	background: #006; 
+}
+.phone #main-nav li:before {
+	content: "o"; 
+	color: #09C;
+	padding: 10px; 
+}
+.lt-ie6 .phone #main-nav li {
+	display: block; 
+}
+.lt-ie6 #main-nav li {
+	list-style-type: none; 
+}
+.lt-ie6 #main-nav li.active {
+	color: #fff;
+	background: #006cb7; 
+}
+.lt-ie8 #main-nav li {
+	display: block;
+	float: left; 
+	text-align: center;
+	font-size: 14px; 
+}
+.lt-ie8 #main-nav li.active a {
+	color: #fff; 
+}
+#header {
+	border-bottom: 2px #FFFFFF solid; 
+}
+.lt-ie8 #header {
+	float: left; 
+	width: 100%; 
+	text-align: center; 
+}
+#header .brand {
+	padding: 10px 0px;
+}
+.lt-ie6 #main-nav {
+	padding: 0px;
+}
+/*----------一级菜单 结束-----------*/
+
+
+/*--------------二级菜单 开始------------*/
+#leftMenu{
+        margin-left: 0px;
+}
+#page {
+	background: #fff;
+	overflow:hidden;
+	-webkit-transition: left 0.2s linear;
+	-moz-transition:left 0.2s linear;
+        -o-transition:left 0.2s linear;
+        -ms-transition:left 0.2s linear;
+        transition:left 0.2s linear;
+        min-height:460px;
+}
+.phone #page .container {
+	background: #fff !improtant;
+	padding:0px 5px 0px 5px;
+}
+.phone #page {
+	position: absolute;
+	left:0px;
+	width: 100%;
+	top: 0px;
+}
+#page.opened {
+    left: 247px;
+    -webkit-box-shadow:-5px 0px 55px rgba(0,0,0,0.9);
+    -moz-box-shadow:-5px 0px 55px rgba(0,0,0,0.9);
+    -o-box-shadow:-5px 0px 55px rgba(0,0,0,0.9);
+    -ms-box-shadow:-5px 0px 55px rgba(0,0,0,0.9);
+    box-shadow:-5px 0px 55px rgba(0,0,0,0.9);  
+}
+
+#page .menu-bar {
+	border-bottom: solid 4px #006cb7;
+	display: none;
+}
+#page .menu-bar .brand {
+	position: absolute;
+	right: 15px;
+	top: 48px;
+	text-align: right;
+}
+.phone #page .menu-bar {
+	display: block;
+}
+
+#page.opened #left-menu-wrapper{
+    display:none;    
+    
+}
+
+#menu-button {
+	display: block;
+	width: 50px;
+	background: #006bb7;
+	padding: 12px 10px 6px 12px;
+}
+#menu-button span {
+	display: block;
+	background: #fff;
+	width: 24px;
+	height: 4px;
+	padding: 0;
+	margin-bottom: 4px;
+}
+#sub-menu-button{
+	position: absolute;
+	right: 10px;	
+	top: 10px;
+	padding:8px 12px; 
+	z-index:10;
+	width: 60px;
+	display: block;
+}
+#sub-menu-button a{
+   margin:0px 30px;
+}
+.accordion-group {
+    margin:0px;	
+    padding:5px 0px;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+}
+.accordion-heading {
+	font-size:15px;	/**开始是15px*/
+}
+.accordion-heading a, .accordion-heading a:hover{
+	position:relative;
+	display:block;	
+	width:100%;
+	padding:9px 0px 9px 14px;
+        color:#666;
+        text-decoration:none;
+        font-family:"Microsoft YaHei","微软雅黑";
+}
+.lt-ie7 .accordion-heading a, .lt-ie7 .accordion-heading a:hover{
+    width:208px;    
+}
+.accordion-group.active .accordion-heading a{
+	color:#0d459a;	
+}
+.accordion-inner {
+	background:#f7f7f7;	
+	padding:0px;
+}
+.accordion-inner ul {
+	list-style:none;
+	font-size:14px;
+	margin:0px;
+}
+.accordion-inner ul li{
+	padding:5px 0px 5px 46px;
+	margin:0px;
+}
+.accordion-inner ul li a{
+	display:inline-block;
+	width:100%;
+        text-decoration:none;
+        color:#666;
+        position:relative;
+        font-family:"Microsoft YaHei","微软雅黑";
+}
+.accordion-inner ul li.active{
+	background:#d1edf8;
+	border-left:solid 6px #93bde5;
+	padding-left:40px;
+}
+.accordion-inner ul li.active a{
+	color:#0d459a;
+}
+.accordion-inner ul li.active a.active{
+    background:#d1edf8;
+	color:#0d459a;
+}
+.accordion-inner ul li:hover{
+	background:#e7f6fc;
+}
+.accordion-inner div {
+	padding:2px 0px 2px 35px;
+	font-size:12px;
+}
+.accordion-inner div.grid{
+        padding:2px 0px 18px 35px;
+}
+.accordion-inner div
+.accordion-inner div a{
+	display:inline-block;
+	width:100%;
+	color:#959595;
+}
+.accordion-inner div a:hover{
+	background:#e7f6fc;
+        text-decoration:none; 
+}
+.accordion-inner a.active{
+    color:#0d459a;
+    background:none;
+}
+.accordion i.pointer{
+    display:block;
+    position:absolute;
+    right:22px;
+    top:11px;
+    width:8px;
+    height:15px;
+    background:url(/tplresource/cms/www/zhongtie/img/common/menu_pointer_right.png);
+    background-repeat:no-repeat;	
+}
+.accordion i.pointer.down{
+    right:22px;
+    top:12px;
+    width:16px;
+    height:8px;
+    background:url(/tplresource/cms/www/zhongtie/img/common/menu_pointer_down.png);
+    background-repeat:no-repeat;   
+}
+.accordion i.bullet{
+    display:block;
+    position:absolute;
+    left:-25px;
+    top:0px;
+    width:22px;
+    height:22px;
+    background:url(/tplresource/cms/www/zhongtie/img/common/list-square-bullet.png);
+    background-repeat:no-repeat;	
+}
+.accordion i.bullet.active{
+    background:url(/tplresource/cms/www/zhongtie/img/common/list-active-bullet.png);
+    background-repeat:no-repeat;	
+}
+.accordion div.grid div{
+	display:inline-block;
+	width: 40%;    
+	padding: 0px 0px 0px 12px;
+        *float:left;
+        *position:relative;
+}
+.accordion div.stack div{
+	width:98%;
+	padding:0px 0px 0px 12px;
+}
+
+.lt-ie7 .accordion div.stack div{
+    width:120px;
+    padding:0px 0px 0px 0px;
+}
+
+.phone .auto-scroll, .tablet .auto-scroll{
+       max-height:160px;
+       overflow:scroll;
+}
+
+.v-sepline{
+    border-top:solid 14px #93bde5;
+	border-right:solid 1px #ccc;
+    padding-bottom: 180px; 
+}
+
+#left-menu-toggle{
+    position:absolute;
+    width:30px;
+    height:70px;
+    top:50px;
+    right: -30px;
+    background: url(/tplresource/cms/www/zhongtie/img/common/left-menu-toggle-open.png);
+    background-repeat:no-repeat;
+    padding:10px 5px;
+    cursor:pointer;
+}
+
+.lt-ie7 #left-menu-wrapper {
+    width:238px;
+}
+
+#left-menu-wrapper.opened #left-menu-toggle{
+    background: url(/tplresource/cms/www/zhongtie/img/common/left-menu-toggle-close.png);
+    background-repeat:no-repeat;
+}
+
+.phone #left-menu-wrapper, .tablet #left-menu-wrapper{
+    padding-bottom:0px;
+    -webkit-transition:left 0.5s ease;
+    -moz-transition:left 0.5s ease;
+    -o-transition:left 0.5s ease;
+    -ms-transition:left 0.5s ease;
+    transition:left 0.5s ease;
+    position: absolute;
+    background: #fff;
+    top:144px;
+    left: -248px;
+    width: 247px;
+    z-index: 5;
+    box-shadow:0px 3px 18px rgba(0,0,0,0.8);
+}
+
+.phone #left-menu-wrapper{
+    top:46px;
+    left: -252px;
+}
+
+#left-menu-wrapper.opened{
+    left:0px;
+}
+#left-menu a, #left-menu a:hover{
+    color:#666;
+    text-decoration:none;
+}
+/*-----------二级菜单 结束-----------*/
+
+
+/*--------客服浮动窗口 开始-----------*/
+a.TP-Mini-Nav {
+	position: fixed;
+	right: 0px; 
+	top: 40%;
+	width: 30px !important;
+        color:#fff;
+	background: #006CB7;
+	padding-top:22px;
+	z-index:99998;
+	text-align:center;
+	border:1px solid #006CB7;
+        line-height:16px;
+        background:#006CB7 url(../../img/common/img_iconliuyan.jpg) no-repeat top;
+}
+.TP-Mini-Nav{display:block;}
+.TP-Mini-Nav:hover{color:#fff;
+     text-decoration:none;}
+.TP-Mini-Nav:visited{color:#fff;}
+.lt-ie7 .TP-Mini-Nav {
+        _position: absolute;
+	_right:expression(documentElement.scrollRight + "px");
+	_top: expression(documentElement.scrollTop + 300 + "px");
+        width:20px;
+        padding:10px 4px;
+}
+/*--------客服浮动窗口 结束-----------*/

@@ -1,0 +1,337 @@
+﻿Cms = {};
+/**
+ * 浏览次数
+ */
+Cms.viewCount = function(base, contentId, viewId, commentId, downloadId, upId,
+		downId) {
+	viewId = viewId || "views";
+	commentId = commentId || "comments";
+	downloadId = downloadId || "downloads";
+	upId = upId || "ups";
+	downId = downId || "downs";
+	$.getJSON(base + "/content_view.jspx", {
+		contentId : contentId
+	}, function(data) {
+		if (data.length > 0) {
+			$("#" + viewId).text(data[0]);
+			$("#" + commentId).text(data[1]);
+			$("#" + downloadId).text(data[2]);
+			$("#" + upId).text(data[3]);
+			$("#" + downId).text(data[4]);
+		}
+	});
+}
+/**
+ * 客户行为信息统计
+ */
+Cms.siteFlow = function(base, page, referer) {
+	var height = window.screen.height;
+	var width = window.screen.width;
+	var clientBrowse = ClientCheck_Browse();
+	var clientOS = ClientCheck_OS();
+	$.get(base + "/flow_statistic.jspx", {
+		page : page,
+		referer : referer,
+		height : height,
+		width : width,
+		clientBrowse : clientBrowse,
+		clientOS : clientOS
+	});
+}
+/**
+ * 成功返回true，失败返回false。
+ */
+Cms.up = function(base, contentId, origValue, upId) {
+	upId = upId || "ups";
+	var updown = $.cookie("_cms_updown_" + contentId);
+	if (updown) {
+		return false;
+	}
+	$.cookie("_cms_updown_" + contentId, "1");
+	$.get(base + "/content_up.jspx", {
+		"contentId" : contentId
+	}, function(data) {
+		$("#" + upId).text(origValue + 1);
+	});
+	return true;
+}
+/**
+ * 成功返回true，失败返回false。
+ */
+Cms.down = function(base, contentId, origValue, downId) {
+	downId = downId || "downs";
+	var updown = $.cookie("_cms_updown_" + contentId);
+	if (updown) {
+		return false;
+	}
+	$.cookie("_cms_updown_" + contentId, "1");
+	$.get(base + "/content_down.jspx", {
+		contentId : contentId
+	}, function(data) {
+		$("#" + downId).text(origValue + 1);
+	});
+	return true;
+}
+/**
+ * 获取附件地址
+ */
+Cms.attachment = function(base, contentId, n, prefix) {
+
+	$.get(base + "/attachment_url.jspx", {
+		"cid" : contentId,
+		"n" : n
+	}, function(data) {
+		var url;
+		for (i = 0;i < n; i++) {
+			url = base + "/attachment.jspx?cid=" + contentId + "&i=" + i
+					+ data[i];
+                        //alert("#" + prefix + i);
+			$("#" + prefix + i).attr("href", url);
+		}
+	}, "json");
+}
+/**
+ * 提交评论
+ */
+Cms.comment = function(callback, form) {
+	form = form || "commentForm";
+	$("#" + form).validate( {
+		submitHandler : function(form) {
+			$(form).ajaxSubmit( {
+				"success" : callback,
+				"dataType" : "json"
+			});
+		}
+	});
+}
+/**
+ * 获取评论列表
+ * 
+ * @param siteId
+ * @param contentId
+ * @param greatTo
+ * @param recommend
+ * @param orderBy
+ * @param count
+ */
+Cms.commentList = function(base, c, options) {
+	c = c || "commentListDiv";
+	$("#" + c).load(base + "/comment_list.jspx", options);
+}
+/**
+ * 客户端包含登录
+ */
+Cms.loginCsi = function(base, c, options) {
+	c = c || "loginCsiDiv";
+	$("#" + c).load(base + "/login_csi.jspx", options);
+}
+/**
+ * 向上滚动js类
+ */
+Cms.UpRoller = function(rid, speed, isSleep, sleepTime, rollRows, rollSpan,
+		unitHight) {
+	this.speed = speed;
+	this.rid = rid;
+	this.isSleep = isSleep;
+	this.sleepTime = sleepTime;
+	this.rollRows = rollRows;
+	this.rollSpan = rollSpan;
+	this.unitHight = unitHight;
+	this.proll = $('#roll-' + rid);
+	this.prollOrig = $('#roll-orig-' + rid);
+	this.prollCopy = $('#roll-copy-' + rid);
+	// this.prollLine = $('#p-roll-line-'+rid);
+	this.sleepCount = 0;
+	this.prollCopy[0].innerHTML = this.prollOrig[0].innerHTML;
+	var o = this;
+	this.pevent = setInterval(function() {
+		o.roll.call(o)
+	}, this.speed);
+}
+Cms.UpRoller.prototype.roll = function() {
+	if (this.proll[0].scrollTop > this.prollCopy[0].offsetHeight) {
+		this.proll[0].scrollTop = this.rollSpan + 1;
+	} else {
+		if (this.proll[0].scrollTop % (this.unitHight * this.rollRows) == 0
+				&& this.sleepCount <= this.sleepTime && this.isSleep) {
+			this.sleepCount++;
+			if (this.sleepCount >= this.sleepTime) {
+				this.sleepCount = 0;
+				this.proll[0].scrollTop += this.rollSpan;
+			}
+		} else {
+			var modCount = (this.proll[0].scrollTop + this.rollSpan)
+					% (this.unitHight * this.rollRows);
+			if (modCount < this.rollSpan) {
+				this.proll[0].scrollTop += this.rollSpan - modCount;
+			} else {
+				this.proll[0].scrollTop += this.rollSpan;
+			}
+		}
+	}
+}
+Cms.LeftRoller = function(rid, speed, rollSpan) {
+	this.rid = rid;
+	this.speed = speed;
+	this.rollSpan = rollSpan;
+	this.proll = $('#roll-' + rid);
+	this.prollOrig = $('#roll-orig-' + rid);
+	this.prollCopy = $('#roll-copy-' + rid);
+	this.prollCopy[0].innerHTML = this.prollOrig[0].innerHTML;
+	var o = this;
+	this.pevent = setInterval(function() {
+		o.roll.call(o)
+	}, this.speed);
+}
+Cms.LeftRoller.prototype.roll = function() {
+	if (this.proll[0].scrollLeft > this.prollCopy[0].offsetWidth) {
+		this.proll[0].scrollLeft = this.rollSpan + 1;
+	} else {
+		this.proll[0].scrollLeft += this.rollSpan;
+	}
+}
+/**
+ * 收藏信息
+ */
+Cms.collect = function(base, cId, operate,showSpanId,hideSpanId) {
+	$.post(base + "/member/collect.jspx", {
+		"cId" : cId,
+		"operate" : operate
+	}, function(data) {
+		if(data.result){
+			if(operate==1){
+				alert("收藏成功！");
+				$("#"+showSpanId).show();
+				$("#"+hideSpanId).hide();
+			}else{
+				alert("取消收藏成功！");
+				$("#"+showSpanId).hide();
+				$("#"+hideSpanId).show();
+			}
+		}else{
+			alert("请先登录");
+		}
+	}, "json");
+}
+/**
+ * 列表取消收藏信息
+ */
+Cms.cmsCollect = function(base, cId, operate) {
+	$.post(base + "/member/collect.jspx", {
+		"cId" : cId,
+		"operate" : operate
+	}, function(data) {
+		if(data.result){
+			if(operate==1){
+				alert("收藏成功！");
+			}else{
+				alert("取消收藏成功！");
+				$("#tr_"+cId).remove();
+			}
+		}else{
+			alert("请先登录");
+		}
+	}, "json");
+}
+/**
+ * 检测是否已经收藏信息
+ */
+Cms.collectexist = function(base, cId,showSpanId,hideSpanId) {
+	$.post(base + "/member/collect_exist.jspx", {
+		"cId" : cId
+	}, function(data) {
+		if(data.result){
+			$("#"+showSpanId).show();
+			$("#"+hideSpanId).hide();
+		}else{
+			$("#"+showSpanId).hide();
+			$("#"+hideSpanId).show();
+		}
+	}, "json");
+}
+
+/**
+* 浏览器信息检测
+*/
+function ClientCheck_Browse() {
+    var sUA=navigator.userAgent;
+     //检测IE浏览器
+    if ((navigator.appName == "Microsoft Internet Explorer")) {
+        //检测模拟IE浏览的OPERA
+        if (sUA.indexOf("Opera")!=-1) {
+        	return "Opera";
+        }
+        if(sUA.indexOf("Maxthon")!=-1) {
+            return "Maxthon";
+        }
+        if(sUA.indexOf("TencentTraveler")!=-1) {
+            return "腾迅TT";
+        }
+        return "IE";
+    }
+    //检测Gecko浏览器
+    if(sUA.indexOf("Gecko")!=-1) {
+        if(navigator.vendor=="Mozilla") {return "Mozilla";}
+        if(navigator.vendor=="Firebird") {return "Firebird"; }
+        if (sUA.indexOf("Firefox")!=-1) {return "Firefox";  }
+        return "Gecko";
+    }
+    //Netscape浏览器
+    if(sUA.indexOf("Netscape")!=-1) {
+    	return "Netscape";
+    }
+    //检测Safari浏览器
+    if(sUA.indexOf("Safari") != -1) {return "Safari";}
+    if(sUA.indexOf("konqueror")!=-1) {return "Konqueror";}
+    //目前世界公认浏览网页速度最快的浏览器，但它占用的系统资源也很大。
+    if(sUA.indexOf("Opera") != -1) {
+        return "Opera";
+    }
+    if((sUA.indexOf( "hotjava" )!=-1) && typeof( navigator.accentColorName ) == "undefined" ) {return "HotJava";}
+    if( document.all && document.getElementById && navigator.savePreferences && (sUA.indexOf( "netfront" ) < 0 ) && navigator.appName != "Blazer" ) {return "Escape 5"; }
+    //Konqueror / Safari / OmniWeb
+    if( navigator.vendor == "KDE" || ( document.childNodes && ( !document.all || navigator.accentColorName ) && !navigator.taintEnabled ) ) {return "KDE";}
+    if( navigator.__ice_version ) { return "ICEbrowser";}
+    if( window.ScriptEngine && ScriptEngine().indexOf( "InScript" ) + 1 ) {
+    	return "iCab";
+    }
+    if(document.layers && !document.classes ) {return "Omniweb";}
+    if(document.layers && !navigator.mimeTypes["*"] ) {return "Escape 4";}
+    if(navigator.appName.indexOf( "WebTV" ) + 1 ) {return "WebTV";}
+    if(sUA.indexOf( "netgem" )!=-1 ) {return "Netgem NetBox";}
+    if(sUA.indexOf( "opentv" )!=-1 ) {return "OpenTV";}
+    if(sUA.indexOf( "ipanel" )!=-1) {return "iPanel MicroBrowser";}
+    if(document.getElementById && !document.childNodes) {return "Clue browser";}
+    if(document.getElementById && ( (sUA.indexOf( "netfront" ) !=-1) || navigator.appName == "Blazer" ) ) {return "NetFront";}
+    if((sUA.indexOf( "msie" ) + 1 ) && window.ActiveXObject ) {return "Pocket Internet Explorer"; }
+    return "Unknown";
+}
+/**
+* 操作系统信息检测
+*/
+function ClientCheck_OS() {
+    var sUA=navigator.userAgent.toLowerCase();
+    if(sUA.indexOf( "win" ) !=-1){
+         if(sUA.indexOf("nt 5.2")!=-1) {return "Windows 2003";}
+         if((sUA.indexOf("nt 5.1")!=-1)||(sUA.indexOf("XP")!=-1)) {return "Windows XP"; }
+         if((sUA.indexOf("nt 5.0")!=-1) || (sUA.indexOf("2000")!=-1)) {return "Windows 2000";}
+         if((sUA.indexOf("winnt")!=-1) || (sUA.indexOf("windows nt")!=-1)) {return "Windows NT";}
+         if((sUA.indexOf("win98")!=-1) || (sUA.indexOf("windows 98")!=-1)) {return "Windows 98";}
+         if(sUA.indexOf("nt 6.0")!=-1) {return "Windows Vista";}
+         if(sUA.indexOf("nt 6.1")!=-1) {return "Windows 7";}
+         return "Windows";
+    }
+    if(sUA.indexOf("linux")!=-1) {return "Linux";}
+    if(sUA.indexOf("freebsd")!=-1) {return "FreeBSD";}
+    if(sUA.indexOf( "x11" )!=-1) {return "Unix";}
+    if(sUA.indexOf("mac") != -1) {return "Mac"; }
+    if(sUA.indexOf("sunos")!=-1) {return "Sun OS";}
+    if((sUA.indexOf("os/2")!=-1) || (navigator.appVersion.indexOf("OS/2")!=-1) || (sUA.indexOf("ibm-webexplorer")!=-1)) {return "OS 2"}
+    if(navigator.platform == "PalmOS" ) {return "Palm OS"; }
+    if((navigator.platform == "WinCE" ) || ( navigator.platform == "Windows CE" ) || ( navigator.platform == "Pocket PC" ) ) {return "Windows CE";}
+    if(sUA.indexOf( "webtv")!=-1) {return "WebTV Platform"; }
+    if(sUA.indexOf( "netgem")!=-1) {return "Netgem";}
+    if(sUA.indexOf( "opentv")!=-1) {return "OpenTV Platform";}
+    if(sUA.indexOf( "symbian")!=-1) {return "Symbian";}
+    return "Unknown";
+}

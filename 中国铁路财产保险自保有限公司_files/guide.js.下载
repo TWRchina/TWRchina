@@ -1,0 +1,11 @@
+var showGuide = function(){
+	if($('body').hasClass('phone') || $('body').hasClass('tablet'))
+		return false
+
+    if($("html").hasClass("lt-ie7"))
+    	DD_PNG.fix('.png');
+
+    $(window).on('resize',function(){
+		$('#tp-guide').css('left',$('.container').offset().left);
+    });
+}

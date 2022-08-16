@@ -1,0 +1,58 @@
+var showWelcome = function(){
+	
+	
+	var _current_version = 'v1.2';
+	
+	var _last_view_version = "";
+	
+	if (Modernizr.localstorage){
+		_last_view_version = localStorage.getItem("last-view-version");
+		
+	}else{
+		var strcookie=document.cookie;
+		var arrcookie=strcookie.split("; ");
+	
+		for(var i=0;i<arrcookie.length;i++){
+			var arr=arrcookie[i].split("=");
+			if("_last_view_version"===arr[0]){
+				_last_view_version=arr[1];
+				break;
+			}
+		}	
+	}
+	
+	
+	
+	if(_last_view_version === null || _last_view_version != _current_version){
+		$('<div id="welcome-modal" data-remote="/include/welcome.html" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>')
+				.append('<div class="modal-body" style="padding:0px"></div>')
+				.append('<div class="modal-footer"><button id="btnWelcome" class="btn btn-primary" data-dismiss="modal">开始全新体验</button></div>')
+				.appendTo('body');
+		$('#welcome-modal').modal();
+		
+		if(Modernizr.csstransitions){
+			$('#welcome-modal').on('shown', function(){
+				$('#welcomeSlider .bxslider').bxSlider({
+						//pager:false
+					});
+			});
+		}else{
+			$('#welcome-modal').find('.modal-body').load('/include/welcome.html', function(){
+				$('#welcomeSlider .bxslider').bxSlider({
+						pager:false
+					});
+			});
+		}
+		
+		
+		$('#btnWelcome').on('click',function(){
+			//don't show welcome screen until new version release;
+			if (Modernizr.localstorage){
+				localStorage.setItem("last-view-version", _current_version);		
+			}else{
+				document.cookie="last-view-version=" + _current_version;	
+			}
+		});
+		
+	}
+}

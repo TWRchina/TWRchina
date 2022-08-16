@@ -1,0 +1,99 @@
+var	notsupported	= !Modernizr.mq('only all');
+
+
+var phoneMenu = {
+		status : '',
+		
+		ON:function(){
+			if(!($('#main-nav') && $(_global_settings.page)))
+				return false;
+			
+			if(this.status!='ON'){
+				$('#main-nav').prependTo($('body'));
+				$('#main-nav').height($(_global_settings.page).outerHeight());	
+			
+				$('#global-nav').insertBefore($('#phone-menu-bar'));
+			}
+			
+			this.status = 'ON';
+		},
+		OFF:function(){
+			if(this.status!='OFF'){
+				$('#main-nav').appendTo($('header nav'));
+				$('#page').removeClass('opened');
+				$('#main-nav').height('');
+				
+				$('#global-nav').prependTo($('#header header'));
+			}
+			this.status = 'OFF';
+		},
+		TOGGLE:function(res){
+			
+			if(notsupported)
+				return false;
+				
+			if(res=='phone'){
+				$('body').addClass('phone').removeClass('tablet').removeClass('desktop');
+					phoneMenu.ON();
+			}
+			if(res=='tablet'){
+					$('body').addClass('tablet').removeClass('phone').removeClass('desktop');
+					phoneMenu.OFF();
+			}
+			if(res=='desktop'){
+					$('body').addClass('desktop').removeClass('tablet').removeClass('phone');
+					phoneMenu.OFF();
+			}
+		}
+};
+
+
+var jRes = jRespond([
+			{
+				label: 'phone',
+				enter: 0,
+				exit: 639
+			},{
+				label: 'tablet',
+				enter: 640,
+				exit: 979
+			},{
+				label: 'desktop',
+				enter: 980,
+				exit: 10000000
+			}
+		]);
+		
+		
+	jRes.addFunc({
+			breakpoint: 'desktop',
+			enter: function() {
+				$('body').addClass('desktop');
+				phoneMenu.TOGGLE('desktop');
+				$(window).trigger('resize');
+			},
+			exit: function() {
+				$('body').removeClass('desktop');
+			}
+		});
+		
+		jRes.addFunc({
+			breakpoint: 'tablet',
+			enter: function() {
+				$('body').addClass('tablet');
+				phoneMenu.TOGGLE('tablet');
+				$(window).trigger('resize');
+			},
+			exit: function() {
+				$('body').removeClass('tablet');
+			}
+		});
+		
+		jRes.addFunc({
+			breakpoint: 'phone',
+			enter: function() {
+				$('body').addClass('phone');
+				phoneMenu.TOGGLE('phone');
+				$(window).trigger('resize');
+			}
+		});

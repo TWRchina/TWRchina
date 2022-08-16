@@ -1,0 +1,511 @@
+/*----滑动广告 开始----*/
+.bx-controls{
+      _width:996px;
+      _margin:0 auto;
+}
+#pane-individual, #pane-group{
+    min-height:425px;
+    _height:425px;
+    *height:425px;
+}
+#adv{
+	width:100%;
+	/*background:url(../../img/home/advbg01.png); */       
+        background-position:top center;
+        background-repeat:no-repeat;
+	}
+#flash{
+	overflow:hidden;
+	width:100%;
+	overflow:hidden;
+}
+#flash li{
+        list-style:none;
+}
+#advbg{
+	position:relative;
+	}
+.flash_bar{
+	position:absolute;
+	bottom:10px;
+	right:5px;
+	}
+.current{
+	display:block;
+	float:left;
+	width:10px;
+	height:10px;
+	cursor:pointer;
+	margin:0px 3px;
+	background:#006cb7;
+}
+.current_over{
+	z-index:3000;
+	display:block;
+	float:left;
+	width:10px;
+	height:10px;
+	cursor:pointer;
+	margin:0px 3px;
+	background:#00ae4d;
+}
+/*----滑动广告 结束----*/
+.priceright{
+       float:right;
+       position:absolute;
+       right:0px;
+        }
+
+div.title16{
+	font-size:16px;
+	color:#0D5F99; 
+	}
+.nav-tabs{
+	margin-bottom:0px; 
+	}
+.nav li{
+	list-style:none;
+	}
+.home-title{
+	color:#0D5F99; 
+	font-weight:bold;
+	font-family:"微软雅黑" !important;
+	font-size:16px; 
+	border-bottom:3px solid #88B8FF; 
+	padding:7px 0px; 
+	display:block; 
+	overflow:hidden !important; 
+	width:100%; 
+        _height:22px; 
+        *height:22px;   
+	}
+.home-title span{
+        float:left;
+}
+#tab1,#tab2,#tab3{
+        min-height:250px;
+}
+.span4 .home-title{
+	border-bottom:3px solid #C2C2C2; 
+	}
+.list-tab{
+	float:left;
+	font-size:12px; 
+	padding:0;
+	margin:0px 0px 0px 20px; 
+	}
+.list-tab li{
+	float:left; 
+	list-style:none; 
+	margin:0px 1px;	
+	padding:0px 10px; 
+	line-height:20px; 
+	}
+.list-tab .active, .list-tab li:hover, .list-tab li a:hover{
+	background:#dff3ff;
+	text-decoration:none; 
+	color:#4d4d4d; 
+	}
+.list-product{
+	/*float:left;*/
+	/*width:370px;*/
+	border-bottom:1px solid #C0C0C0;
+	min-height:122px; 
+        _height:122px;
+        *height:122px;
+	}
+.list-product dl{
+	display:table; 
+	width:100%;
+	padding:12px 0; 
+	margin:0; 
+	}	
+.list-product dd{
+	float:left;
+	margin:0px 0px 0px 0px; 
+}
+.pro-img{
+	width:30%;
+	} 
+.context, .classifytext{
+	width:70%; 
+	float:left;
+	*width:65%; 
+	padding-left:12px;  
+	}
+.context p, .context a{
+	font-size:14px;
+	color:#006cb7; 
+	margin-bottom:5px;
+	} 
+.context a:hover{
+	text-decoration:underline; 
+	}
+.list-classify{
+	/**min-height:122px;*/
+        *height:110px;
+        _height:120px;
+	padding:12px 0px 0px 10px; 
+		*padding:0px 0px 0px 10px; 
+		*min-height:122px;
+	}
+.list-classify span{
+	font-size:14px;
+	width:77%; 
+	border-bottom:1px solid #CECECE; 
+	display:inline-block;
+	margin-left:15px; 
+	padding-bottom:10px;
+	}
+.classify-text a{
+	padding:2px 3px;
+	white-space:nowrap;
+	}
+.box-graybg{
+	background:#f7f7f7; 
+	border:1px solid #e1e1e1;
+	display:table;
+	width:100%; 
+        _width:95%;
+        *width:95%;
+        padding:5px; 
+	margin-top:5px;         
+        overflow:auto;
+	}
+
+#jgggdiv .box-graybg{
+         min-height:185px;
+        _height:172px;
+        *height:172px;
+}
+ul.channels{
+        margin-bottom:0px;
+        margin-left:20px;
+}
+.box-graybg_1{
+	background:url(../../img/home/bg.jpg) no-repeat; 
+	display:table;
+        overflow:hidden;
+        height:173px;
+	width:100%;
+	margin-top:5px;
+	margin-bottom:7px;
+	}
+.box-graybg_2{
+	background:url(../../img/home/bg1.jpg) no-repeat; 
+	}
+.box-graybg_3{
+        display:table;
+        padding:8px;         
+        overflow:hidden;
+	width:100%;
+        _width:223px;       
+	margin-top:7px;
+	margin-bottom:7px; 
+	/*background:url(../../img/home/bg2.jpg) no-repeat;*/
+	} 
+.box-graybg_3 ul.channels li{
+height:20px;
+min-height:20px;
+}
+/*透明度*/
+.channels_1{
+        min-width:240px;
+	float:left;
+        margin:0;    
+	/*width:84%;*/
+	padding:10px 10px 2px 10px;
+	position:relative; 
+        min-height:140px;
+        overflow:hidden;       
+	}
+.channels_1ul{
+	position:absolute;  
+	}
+.channels_1 .channels li a, .box-graybg_3 .channels li a{
+	color:#fff;
+	}
+/*透明度*/
+
+span.price-time{
+	font-size:12px; 
+	color:#666666;
+	}
+.btn-group .btn{
+	color:#006cb7;
+	margin-top:5px; 
+	}
+.pirce-details, .jiage, .box-graybg{  
+        overflow:hidden;
+}
+.pirce-details th{
+	border-bottom:1px solid #e1e1e1; 
+	text-align:left; 
+	}
+.more{
+	text-align:right;
+	display:block; 
+	width:100%;
+	margin-top:-2px; 
+        margin-bottom:0px;
+	background:#fff; 
+	}
+.times{
+	float:right;
+	color:#999; 
+        *margin-top:-20px;
+        _margin-top:-20px;
+	}
+/*-----资产管理 开始----------*/
+.context ul{
+	margin-bottom:0; 
+	}
+.context li{
+	list-style:none; 
+	font-size:12px; 
+	}
+.context li a{
+	color:#666666;
+	margin-bottom:0;
+	}
+.assetbox{
+        margin-top:15px;
+        }
+.assetbox a{
+        float:left;
+        }
+.asset{
+       font-size:12px;
+       float:left;
+       dispaly:inline-block;
+      }
+.asset a:hover{
+       color:#006cb9;
+      }
+.asset li{ 
+      list-style:none;
+}
+/*-------资产管理 结束--------*/
+/*-------投资者 开始---------*/
+.home-valuation {
+	margin-left:0; 
+	}
+.home-valuation li{
+	height:27px;
+        _height:24px;
+        _line-height:24px;
+        *height:24px;
+        *line-height:24px;    
+	line-height:27px; 
+	list-style:none; 
+	padding-left:16px; 
+	}
+.home-valuation li span{
+	display:block;
+	width:48%; 
+	float:left;
+	}
+.home-valuation li span.home-bule{
+	color:#006cb7;
+	}
+.home-left,.home-right{
+	position:absolute;
+	cursor:pointer;
+	}
+.home-book{
+        margin-top:30px;
+        }
+#book_nom{
+        margin-top:25px;
+        *margin-top:30px;
+}
+.home-left{
+	top:60px;
+	left:5px;
+	}
+.home-right{
+	top:60px;
+	left:180px;
+	}
+.home-name{
+	float:left;
+	width:20%;
+	font-size:14px;
+	margin-left:30px;
+	}
+.home-bottom{
+	height:82px;        
+	padding-top:14px;
+        _height:70px;
+        *height:70px;
+        _padding-top:7px;
+        *padding-top:7px;
+	background:#ddf2ff;
+	}
+.home-bottom p{
+	width:80%;
+	margin:0 auto;
+	font-size:14px;
+	font-family:'å¾®è½¯é›…é»‘';
+	font-weight:bold;
+	}
+.home-bottom p span{
+	font-size:12px;
+	font-family:'å®‹ä½“';
+	font-weight:normal;
+	float:right;
+	}
+/*--------投资者 结束----------*/
+
+/*--------合作伙伴效果 开始----*/
+＃book ul li{
+        list-style:none;
+        }
+.home_hezuo{
+	position:relative;
+	}
+.home_hezuo #zuo,.home_hezuo #you{
+	position:absolute;
+	cursor:pointer;
+	}
+#zuo{
+    left:10px;
+    top:134px;
+    }
+#you{  
+    top:134px;
+    left:365px;
+    }
+.home_kuang{
+	overflow:hidden; 
+        width:400px;
+	}
+.home_kuang ul{
+        margin:0px;
+        padding:0px;
+        }
+#home_img li{
+	float:left; 
+	list-style:none;
+	}
+
+/*-----团体及企业客户 九宫格 开始-----*/
+.pro-nine ul{
+	overflow:auto;  
+	zoom:1;	 
+	margin:0;  
+	border-right:1px solid #e1e1e1;  
+	border-top:1px solid #e1e1e1; 
+	margin-top:5px;  
+	}
+.pro-nine ul li{
+	width:33.3%; 
+	_width:33%; 
+	*width:33%;  
+	float:left; 
+	line-height:60px; 
+	height:60px;  
+	text-align:center; 
+	display:inline-block; 
+	border-left:1px solid #e1e1e1; 
+	border-bottom:1px solid #e1e1e1;  
+	overflow:hidden;  
+	font-size:14px;
+	}
+.pro-nine ul a, .pro-nine ul a:link{
+	display:block;
+	text-decoration:none;
+	}
+.pro-nine ul li:hover{
+	background:#d9dfe1;
+	}
+/*-----团体及企业客户 九宫格 结束-----*/
+
+
+/*-----合作伙伴效果 结束-----*/
+/*tablet*/
+@media screen and ( max-width:980px){
+.columns-five{ 
+	margin-right:10px;
+	padding-left: 10px;
+	} 
+.market{
+	display:block;  
+	overflow:hidden; 
+	clear:both; 
+	padding-left:10px;
+	margin-bottom:20px; 
+	}
+.geren{
+	float:left; 
+	width:54%; 
+	margin-right:10px; 
+	}
+
+#jgggdiv{  
+        margin-top:5px;
+}
+}
+
+@media screen and ( max-width:700px){
+.columns-five{
+	width:100%;
+	margin-right:10px;
+	padding-left:10px;
+	}
+.times{
+	margin-right:20px;	
+	}
+.columns-four, .market{
+	width:100%;
+	padding-left:10px;
+	}
+.market{
+	display:block; 
+	overflow:hidden; 
+	clear:both;
+	}
+}
+
+@media screen and ( max-width:500px){
+.geren{
+	float:none;
+	width:100%;
+	margin-right:10px; 
+	}
+.geren .box-graybg{
+	min-height:120px;
+	display:block;
+	}
+.jiage{
+	float:none;
+	width:100%;
+	}
+.flash_bar{
+	bottom:5px;
+	}
+.current{
+	width:7px;
+	height:7px;
+	}
+.current_over{
+	width:7px;
+	height:7px;
+	}
+.market{
+       overflow:visible;
+}
+.home_kuang img{
+       width:80%;
+}
+#you{
+     left:287px;
+}
+}
+
+
+@media screen and (max-width: 966px) {
+       .tablet5 .box-graybg{
+       height:180px;
+       }
+}
