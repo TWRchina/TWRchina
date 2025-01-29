@@ -1,93 +1,86 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-cn">
 <head>
-    
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TWR火车模型工作室官网</title>
-    <link rel="shortcut icon" href="./img/TWR.jpg" type="image/x-icon" />
-    <style>
+    <title>PINKW的网站</title>
+    <link rel="shortcut icon" href="./234.jpg" type="image/x-icon" />
+    <p id="currentDateTime">加载中...</p>  
+  
+    <script>  
+        
+        function showCurrentDateTime() {  
+            const now = new Date();  
+            const year = now.getFullYear();  
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // 月份是从0开始的，所以要+1  
+            const day = String(now.getDate()).padStart(2, '0');  
+            const hours = String(now.getHours()).padStart(2, '0');  
+            const minutes = String(now.getMinutes()).padStart(2, '0');  
+            const seconds = String(now.getSeconds()).padStart(2, '0');  
+            const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;  
+            document.getElementById('currentDateTime').textContent = formattedDateTime;  
+        }  
+  
+        // 初始显示当前日期和时间  
+        showCurrentDateTime();  
+  
+        // 每秒更新一次日期和时间  
+        setInterval(showCurrentDateTime, 1000);  
+        
+    </script>  <style>
         .www{
             text-align: center;
         }
         .box1{
-
-            background-color: blue;
-
+            background-color: rgba(0, 0, 0, 0.442);
+           
+        } 
+        .box2{
+            padding-left: 3cm;
         }
-        span{
-            background-color:aquamarine;
-            font-size: medium;
+        a{
+            text-decoration: none;
         }
-        
+        a:link{color: white;}
+        a:visited{color: white;}
+        a:hover{color: aqua;}
+        body {
+            background-image: url('./背景图.jpg');
+            background-repeat: no-repeat;
+            background-size: cover; /* 或者使用contain */
+            background-attachment: fixed; /* 背景图片固定，不随页面滚动 */
+        }
     </style>
+    
 </head>
-<body>
-    <div class="box1">
-    <h1 style="color:white;background-color:cornflowerblue;width: 160px;">快捷导航></h1>
-    </div>
+
+<body onload="startTime()">
     <div>
-    <a href="TWR简绍.html"><span>工作室介绍</span></a>
-    <!--<a href="商城.html"><span>商城</span></a>-->
-    <a href="中国铁路.html"><span>中国铁路介绍</span></a>
-    <a href="中国国家铁路集团有限公司.html"target="_blank"><span>打开中国国家铁路集团官网</span></a>
-    <a href="中国铁路财产保险自保有限公司.html"target="_blank"><span>打开中国铁路财产保险自保有限公司官网</span></a>
-    <!--<a href="www.cre.cn.html" ><span>打开中铁快运官网</span></a>-->
-    <a href="http://www.95306.cn/" target="_blank"><span>打开95306官网</span></a>
-    <a href="https://www.12306.cn/index/" target="_blank"><span>打开铁路12306</span></a>
-    <!--<a href="TS2022下载.html"><span>下载TS2022</span></a>-->
-   <a href="制作信息.html"><span>制作信息</span></a>
-    <!--<a href="插件.html"><span>下载插件</span></a>-->
-    <a href="./公告.html"><h2 style="color :red">公告</h2></a>
-
-
-
+        <h4 style="color:blue;">所在地区路局</h4><img height="30" width="225" src="./img/成都.jpg"><!--<img width="50" height="50" src="./img/西南铁路.png">-->
+        
     </div>
     <div class="box1">
-        <h1 style="color:white;text-align: center;background-color:cornflowerblue;width: 500px;">TWR火车模型工作室欢迎您</h1>
+        <div>
+            <h2 style="color: white;" >Welcome</h2>
+            <h2 style="color: white;">快捷导航></h2>
+        </div>
+        <span><div class="box2">
+            <a href="中国铁路.html"><span>| 中国铁路介绍 |</span></a>
+            <a href="中国国家铁路集团有限公司.html"target="_blank"><span>| 打开中国国家铁路集团官网 |</span></a>
+            <a href="中国铁路财产保险自保有限公司.html"target="_blank"><span>| 打开中国铁路财产保险自保有限公司官网 |</span></a>
+            <a href="http://www.95306.cn/" target="_blank"><span>| 打开95306官网 |</span></a>
+            <a href="https://www.12306.cn/index/" target="_blank"><span>| 打开铁路12306 |</span></a>
+           <a href="制作信息.html"><span>| 制作信息 |</span></a>                
+        </div></span>
+    </div>
+    <div class="box1">
+        <h1 style="color:white;text-align: center;width: 500px;">PINKW的网站</h1>
     </div>
     <div class="www">
-    <img width="200" height="200" src="./img/TWR.jpg">
     <img width="200" height="200" src="./img/微信图片_20220812140953.jpg">
     <img width="200" height="200" src="./img/微信图片_20220812141134.jpg">
     <img width="200" height="200" src="./img/微信图片_20220812141139.jpg">
-    <img width="200" height="200" src="./img/TWR.jpg">
     </div>
-    <!--<h1 style="text-align: center; color:blueviolet">TWR火车模型工作室欢迎您!</h1>
-    <h1 style="text-align: center; color:blueviolet">Welcome to the TWR train work room!</h1>
-    <p style="text-align: center;">--><!--本网站正在试运营中<--</p>
-    <p style="text-align: center;">---><!--作者能力有限，请谅解<---</p>
-    <p style="text-align: center;">This website is in trial operation</p>
-    <p style="text-align: center;">TWR model train work room</p> -->
-   <p style="text-align: center; color:red">请选择下方按钮 Please choose</p>
-   <div class="www">
-    <button><a href="https://www.12306.cn/index/" >打开铁路12306 Open the 12306</a></button>
-    <button><a href="中国铁路.html">中国铁路介绍 China railway</a></button>
-    <!--<a href="商城.html">打开商城</a>-->
-    <button><a href="TWR简绍.html" >工作室介绍</a></button>
-   </div>
-   <div><button><a href="./index.html">刷新</a></button></div>
-    <br><br>
-    <div>
-        <p>友情链接：</p>
-        <a href="中国国家铁路集团有限公司.html" target="_blank"><img src="./img/link05.png"></a>
-        <a href="中国铁路财产保险自保有限公司.html" target="_blank"><img src="./img/link02.png"></a>
-        <a href="http://www.95306.cn/" target="_blank"><img width="408" height="62" src="./img/link03.png"></a>
-        <!--<a href="www.cre.cn.html" target="_blank"><img src="../hash-02/img/link04.png"></a>-->
-        
-    </div>
-    <div>
-       <!--<img src="C:\Users\wlc0412\Desktop\source\code\hash-02\中国铁路95306网_files\ad001.jpg">
-        <img src="C:\Users\wlc0412\Desktop\source\code\hash-02\中国铁路95306网_files\wxgzh.7ac95b33.png">
-        <img src="C:\Users\wlc0412\Desktop\source\code\hash-02\中国铁路95306网_files\ad005.jpg">
-       <audio src="../hash-03/老三 - Last Reunion.mp3" controls></audio>-->
-        <img src="./中国铁路95306网_files/ad001.jpg">
-        <img src="./中国铁路95306网_files/ad005.jpg">
-        
-
-
-       
-
-    </div>
+    <div class="www"><h1 style="text-align: center;color:white">正在更新中...</h1></div>
+</body>
 </html>
